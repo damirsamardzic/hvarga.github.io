@@ -30,6 +30,7 @@
     - [Network Access Configuration](#network-access-configuration)
     - [Update Package Repository](#update-package-repository)
     - [Sound Configuration](#sound-configuration)
+    - [AUR Package Management Tool](#aur-package-management-tool)
     - [Text Editor Installation](#text-editor-installation)
         - [Vim](#vim)
         - [Visual Studio Code](#visual-studio-code)
@@ -46,7 +47,6 @@
     - [Screenshot and Image Manipulation Tool](#screenshot-and-image-manipulation-tool)
     - [i3 Configuration](#i3-configuration)
     - [Set User Locale](#set-user-locale)
-    - [AUR Package Management Tool](#aur-package-management-tool)
     - [Text Editor Configuration](#text-editor-configuration)
         - [VIM Plugins](#vim-plugins)
             - [VimPlug](#vimplug)
@@ -131,6 +131,7 @@
     - [Cross-platform Asynchronous I/O Library](#cross-platform-asynchronous-io-library)
     - [Calendar and Scheduling Application](#calendar-and-scheduling-application)
     - [GDB Frontend](#gdb-frontend)
+    - [Recording and Deterministic Debugging](#recording-and-deterministic-debugging)
     - [Multipurpose Relay](#multipurpose-relay)
     - [Terminal Multiplexer](#terminal-multiplexer)
     - [File Manager](#file-manager)
@@ -158,6 +159,12 @@
     - [Email Client](#email-client)
     - [Multi-protocol Instant Messaging Client](#multi-protocol-instant-messaging-client)
     - [Desktop Wiki](#desktop-wiki)
+    - [Disk Usage Analyzer](#disk-usage-analyzer)
+    - [SSHFS/SFTP File Systems Mounting](#sshfssftp-file-systems-mounting)
+    - [Delete Unneeded Files](#delete-unneeded-files)
+    - [Graphical Frontend For su](#graphical-frontend-for-su)
+    - [Command-line Todo List Manager](#command-line-todo-list-manager)
+    - [Curses-based Scrolling 'Matrix'-like Screensaver](#curses-based-scrolling-matrix-like-screensaver)
     - [Video Games](#video-games)
         - [Single Player Rougelike Dungeon Exploration Game With ASCII Graphics](#single-player-rougelike-dungeon-exploration-game-with-ascii-graphics)
         - [Turn-Based Tactical Strategy Game With a High Fantasy Theme](#turn-based-tactical-strategy-game-with-a-high-fantasy-theme)
@@ -442,6 +449,25 @@ $ sudo pacman -S alsa-utils
 >
 > To enable your microphone, switch to the Capture tab with `F4` and enable a channel with `Space`. Set the recording volume with the up arrow key.
 
+### AUR Package Management Tool
+
+> **Note:**
+>
+> There are a couple of packages that I am using in this document that are missing from the official Arch Linux repository. They are available in [AUR](https://aur.archlinux.org/) which means that the `pacman` can not be used to install such packages. For this purpose, `pacaur` will be used instead.
+
+```
+$ sudo pacman -S expac yajl --noconfirm
+$ mkdir ~/temp
+$ cd ~/temp
+$ gpg --recv-keys --keyserver hkp://pgp.mit.edu 1EB2638FF56C0C53
+$ curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=cower
+$ makepkg -i PKGBUILD --noconfirm
+$ curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=pacaur
+$ makepkg -i PKGBUILD --noconfirm
+$ cd ~
+$ rm -r ~/temp
+```
+
 ### Text Editor Installation
 
 #### Vim
@@ -702,25 +728,6 @@ Open `~/.zshrc` and add following line to the end:
 export LANG=en_US.UTF-8
 export LC_MESSAGES="C"
 export LC_ALL=en_US.UTF-8
-```
-
-### AUR Package Management Tool
-
-> **Note:**
->
-> There are a couple of packages that I am using in this document that are missing from the official Arch Linux repository. They are available in [AUR](https://aur.archlinux.org/) which means that the `pacman` can not be used to install such packages. For this purpose, `pacaur` will be used instead.
-
-```
-$ sudo pacman -S expac yajl --noconfirm
-$ mkdir ~/temp
-$ cd ~/temp
-$ gpg --recv-keys --keyserver hkp://pgp.mit.edu 1EB2638FF56C0C53
-$ curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=cower
-$ makepkg -i PKGBUILD --noconfirm
-$ curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=pacaur
-$ makepkg -i PKGBUILD --noconfirm
-$ cd ~
-$ rm -r ~/temp
 ```
 
 ### Text Editor Configuration
@@ -1793,14 +1800,28 @@ $ sudo pacman -S calcurse
 
 ### GDB Frontend
 
+Lightweight interface:
+
 ```
 $ sudo pacman -S cgdb
+```
+
+Modular visual interface:
+
+```
+$ pacaur --noedit -S gdb-dashboard
+```
+
+### Recording and Deterministic Debugging
+
+```
+$ pacaur --noedit -S rr
 ```
 
 ### Multipurpose Relay
 
 ```
-sudo pacman -S socat
+$ sudo pacman -S socat
 ```
 
 ### Terminal Multiplexer
@@ -1830,8 +1851,16 @@ setw -g pane-base-index 1
 
 ### File Manager
 
+Text based:
+
 ```
 $ sudo pacman -S mc
+```
+
+Graphical based:
+
+```
+$ sudo pacman -S gnome-commander
 ```
 
 ### Image Viewer
@@ -2083,7 +2112,7 @@ $ sudo pacman -S deadbeef
 ### Email Client
 
 ```
-$ sudo pacman -S claws-mail
+$ sudo pacman -S sylpheed
 ```
 
 ### Multi-protocol Instant Messaging Client
@@ -2185,6 +2214,42 @@ use_workweek=False
 [TrayIconPlugin]
 classic=False
 standalone=False
+```
+
+### Disk Usage Analyzer
+
+```
+$ sudo pacman -S baobab
+```
+
+### SSHFS/SFTP File Systems Mounting
+
+```
+$ pacaur --noedit -S sftpman-gtk
+```
+
+### Delete Unneeded Files
+
+```
+$ sudo pacman -S bleachbit
+```
+
+### Graphical Frontend For su
+
+```
+$ sudo pacman -S gksu
+```
+
+### Command-line Todo List Manager
+
+```
+$ sudo pacman -S task
+```
+
+### Curses-based Scrolling 'Matrix'-like Screensaver
+
+```
+$ sudo pacman -S cmatrix
 ```
 
 ### Video Games
